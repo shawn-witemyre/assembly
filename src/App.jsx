@@ -18,13 +18,18 @@ export default function AssemblyEndgame() {
     );
   }
 
-  const languageElements = languages.map((lang) => {
+  const languageElements = languages.map((lang, index) => {
+    const isLanguageLost = index < wrongGuessCount;
     const styles = {
       backgroundColor: lang.backgroundColor,
       color: lang.color,
     };
     return (
-      <span className="chip" style={styles} key={lang.name}>
+      <span
+        className={`chip ${isLanguageLost ? "lost" : ""}`}
+        style={styles}
+        key={lang.name}
+      >
         {lang.name}
       </span>
     );
