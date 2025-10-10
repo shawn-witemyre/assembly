@@ -53,6 +53,11 @@ export default function AssemblyEndgame() {
       </span>
     ));
 
+  function startNewGame() {
+    setCurrentWord(getRandomWord());
+    setGuessedLetters([]);
+  }
+
   const keyboardElements = alphabet.split("").map((letter) => {
     const isGuessed = guessedLetters.includes(letter);
     const isCorrect = isGuessed && currentWord.includes(letter);
@@ -142,7 +147,11 @@ export default function AssemblyEndgame() {
         </p>
       </section>
       <section className="keyboard">{keyboardElements}</section>
-      {isGameOver && <button className="new-game">New Game</button>}
+      {isGameOver && (
+        <button className="new-game" onClick={startNewGame}>
+          New Game
+        </button>
+      )}
     </main>
   );
 }
