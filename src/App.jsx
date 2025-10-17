@@ -2,10 +2,14 @@ import { useState } from "react";
 import { languages } from "../languages";
 import { clsx } from "clsx";
 import { getFarewellText, getRandomWord } from "../utils";
+import { useWindowSize } from "react-use";
+import Confetti from "react-confetti";
 
 export default function AssemblyEndgame() {
   const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
+
+  const { width, height } = useWindowSize();
 
   const numGuessesLeft = languages.length - 1;
   const wrongGuessCount = guessedLetters.filter((letter) => {
@@ -121,6 +125,14 @@ export default function AssemblyEndgame() {
   }
   return (
     <main>
+      {isGameWon && (
+        <Confetti
+          width={width}
+          height={height}
+          recycle={false}
+          numberOfPieces={1000}
+        />
+      )}
       <header>
         <h1>Assembly: Endgame</h1>
         <p>
